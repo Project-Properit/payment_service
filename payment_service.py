@@ -1,4 +1,3 @@
-import time
 from datetime import datetime
 
 from bson import ObjectId
@@ -7,7 +6,15 @@ from app.adapters.db_adapter import update
 from app.models.grouppaymentmodel import GroupPaymentModel
 from app.models.paymentmodel import PaymentModel
 
-while True:
+LOG_PATH = "/home/cs807/properit/logs/paylogs.log"
+
+
+def write_log(path, data):
+    with open(path, "a") as file:
+        file.write(data + "\n")
+
+
+def pay_service():
     all_group_payments = GroupPaymentModel.objects()
     for gp in all_group_payments:
         if gp.is_periodic:
@@ -19,4 +26,9 @@ while True:
                             payment.is_open = False
                             payment.when_payed = datetime.now().replace(microsecond=0)
                             update(payment)
-    time.sleep(300)
+                            write_log("log.txt", "payment paid: " + str(payment.id) + " in group_payment: " + str(
+                                gp.id) + " at: " + str(payment.when_payed) + " (deadline: " + str(
+                                payment.deadline) + ")")
+
+
+pay_service()
