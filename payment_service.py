@@ -22,7 +22,7 @@ def pay_service():
                 for payment_id in gp.payments:
                     payment = PaymentModel.objects.get(id=ObjectId(payment_id))
                     if payment.is_open:
-                        if payment.deadline == datetime.now().month:
+                        if payment.deadline <= datetime.now().month:
                             payment.is_open = False
                             payment.when_payed = datetime.now().replace(microsecond=0)
                             update(payment)
