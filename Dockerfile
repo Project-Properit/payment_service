@@ -4,5 +4,5 @@ COPY requirements.txt ./
 RUN apk add --no-cache --virtual .build-deps gcc musl-dev libffi-dev openssl-dev python3-dev
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
-CMD ["app/payment_service.py"]
-ENTRYPOINT ["python"]
+CMD ["python payment_service.py"]
+# ENTRYPOINT ["python"]
