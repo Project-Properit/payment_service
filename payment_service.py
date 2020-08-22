@@ -26,7 +26,7 @@ def pay_service():
                             payment.is_open = False
                             payment.when_payed = datetime.now().replace(microsecond=0)
                             update(payment)
-                            write_log("log.txt", "payment paid: " + str(payment.id) + " in group_payment: " + str(
+                            write_log(LOG_PATH, "payment paid: " + str(payment.id) + " in group_payment: " + str(
                                 gp.id) + " at: " + str(payment.when_payed) + " (deadline: " + str(
                                 payment.deadline) + ")")
 
