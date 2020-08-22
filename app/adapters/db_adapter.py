@@ -5,10 +5,8 @@ from urllib.parse import quote_plus
 import bson
 from mongoengine import connect
 
-from app.settings import DATABASE_SERVER, DATABASE_USER, DATABASE_PASSWORD, DATABASE_AUTH, DATABASE_PORT
-
 mongo_connection = connect(
-    host=f'mongodb://{DATABASE_USER}:{quote_plus(DATABASE_PASSWORD)}@{DATABASE_SERVER}:{DATABASE_PORT}/{DATABASE_AUTH}?retryWrites=true&w=majority')
+    host=f"mongodb://admin:{quote_plus('bartar20@CS')}@properit.cs.colman.ac.il:21771/admin?retryWrites=true&w=majority")
 
 
 class ArchiveCollections(Enum):
